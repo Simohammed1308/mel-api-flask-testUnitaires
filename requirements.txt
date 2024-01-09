@@ -1,2 +1,2 @@
 Flask
-pytest-mockm
+pytest-mock
