@@ -57,46 +57,6 @@ def create_app(config):
     def score_min():
         return {"score_min" : 0.55}
 
-    @app.route('/credit/<id_client>', methods=["GET"])
-    def credit(id_client):
-
-        # Récupération des données du client en question
-        ID = int(id_client)
-        X = df[df['SK_ID_CURR'] == ID]
-        
-        print('identifiant du client :', ID)
-
-
-        #Isolement des features non utilisées
-        ignore_features = ['Unnamed: 0', 'SK_ID_CURR', 'INDEX', 'TARGET']
-        relevant_features = [col for col in df.columns if col not in ignore_features]
-        X = X[relevant_features]
-        
-        print('X shape = ', X.shape)
-        
-        #Imputation
-        #imputer = SimpleImputer(missing_values=np.nan, strategy='median')
-        #X[X==np.inf] = np.nan
-        #imputer.fit(X)
-        #X_preprocess = imputer.transform(X)
-        #Normalisation
-        #scaler = StandardScaler()
-        #scaler.fit(X_preprocess)
-        #X_norm = scaler.transform(X_preprocess)
-        
-        proba = load_clf.predict_proba(X)
-        prediction = load_clf.predict(X)
-        
-        pred_proba = {
-            'prediction': int(prediction),
-            'proba': float(proba[0][0])
-            
-        }
-
-        print('Nouvelle Prédiction : \n', pred_proba)
-
-        return jsonify(pred_proba)
-        #return json.dumps(pred_proba)
 
     return app
 
