@@ -5,10 +5,10 @@ import flask
 from flask import Flask
 from flask import request, jsonify
 import joblib
-import pandas as pd
-import shap
-import json
-import numpy as np
+#import pandas as pd
+#import shap
+#import json
+#import numpy as np
 
 def create_app(config):
 
